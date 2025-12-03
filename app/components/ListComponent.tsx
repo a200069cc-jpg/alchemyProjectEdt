@@ -1,4 +1,4 @@
-import { View, StyleSheet,Text,FlatList } from 'react-native';
+import { View, StyleSheet,Text,FlatList, Button } from 'react-native';
 
 type FlatListItem = {
     id: string;
@@ -37,7 +37,8 @@ export function ListComponent ({data}:Props){
         keyExtractor={(item) => item.id}
         numColumns={6} //FlatList does NOT respect flex layout for its items.
         renderItem={({ item }) => (
-          <Text style={styles.gridItem}>{item.title}</Text>
+
+          <Button title={item.title} ></Button>
         )}
       />
         </View>

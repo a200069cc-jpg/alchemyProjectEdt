@@ -34,7 +34,7 @@ export default function App() {
       
       <View style={styles.topContainer}>
     
-      <ListComponent data={PlaceHolderList} />
+    
       </View>
       <View style={styles.bottomContainer}>
       <FilterComponent></FilterComponent>
