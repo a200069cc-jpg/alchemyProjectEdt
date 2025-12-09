@@ -2,6 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import {ListComponent} from './components/ListComponent'
 import { FilterComponent } from './components/FilterComponent';
+import { ChatComponent } from './components/ChatComponent';
+
+import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
+import '@/global.css';
 
 export default function App() {
   const PlaceHolderList = [
@@ -30,25 +34,47 @@ export default function App() {
     { id: '23', title: 'Elemento 23' },
     { id: '24', title: 'Elemento 24' },]
   return (
-    <View style={styles.container}>
+    
+    <GluestackUIProvider mode="dark">
+      <View style={styles.container}>
       
       <View style={styles.topContainer}>
-    
-    
+      <View style={styles.chat}>     
+      <ChatComponent ></ChatComponent></View>
+ 
       </View>
+       
       <View style={styles.bottomContainer}>
       <FilterComponent></FilterComponent>
       <ListComponent data={PlaceHolderList} />
       </View>
      
     </View>
+    </GluestackUIProvider>
+  
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  
+  },
+  chat:{
+
+      position: "absolute",
+      right: 10,
+      top: "45%",
+      width: 70,
+      height: 70,
+      borderRadius: 35,
+      backgroundColor: "#f2f2f2",
+      justifyContent: "center",
+      alignItems: "center",
+      borderWidth: 1,
+      borderColor: "#ccc",
+      zIndex: 10
+    
+
   },
   topContainer: {
     height: "70%",
