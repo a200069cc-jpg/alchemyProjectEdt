@@ -1,32 +1,33 @@
-import { View, StyleSheet,Text,Pressable } from 'react-native';
+import { Portal } from '@/components/ui/portal';
+import { Text } from '@/components/ui/text';
+import { Button, ButtonText, ButtonIcon } from '@/components/ui/button';
+import { useState } from 'react';
+import { View } from 'react-native';
+import { CloseIcon } from '@/components/ui/icon';
+import { HStack } from '@/components/ui/hstack';
 
   
 export function ChatComponent (){
-  const styles = StyleSheet.create({
-    chatButton: {
-      width: "100%",
-      height: 60,
-      borderRadius: 25,
-      backgroundColor: "#f2f2f2",
-      justifyContent: "center",
-      alignItems: "center",
-      borderWidth: 1,
-      borderColor: "#ccc",
-      marginVertical: 6,
-    },
-    filterEmoji: {
-      fontSize: 16,
-      color: "#333",
-      textAlign: "center",
-      fontWeight: "500",
-    },
-  });
-
+  const [visible, setVisible] = useState(false);
+  const handleClose = () => setVisible(false);
     return(
       <View>
-      <Pressable style={styles.chatButton}>
-        <Text style={styles.filterEmoji}>💬</Text>
-      </Pressable>
+      <Portal isOpen={visible} >
+        <HStack className="border-2 w-1/3 py-10 gap-4 rounded-lg flex-row justify-center items-center bg-background-0">
+          <Text className="text-typography-950">Portal Content</Text>
+          <Button
+            size="xs"
+            className="h-6 px-1 absolute top-2 right-2"
+            variant="outline"
+            onPress={handleClose}
+          >
+            <ButtonIcon as={CloseIcon} />
+          </Button>
+        </HStack>
+      </Portal>
+      <Button onPress={() => setVisible(!visible)}>
+        <ButtonText>Chat</ButtonText>
+      </Button>
     </View>
     )
 }
