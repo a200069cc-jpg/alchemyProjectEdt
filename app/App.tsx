@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import {ListComponent} from './components/ListComponent'
 import { FilterComponent } from './components/FilterComponent';
 import { ChatComponent } from './components/ChatComponent';
-import { Portal } from '@/components/ui/portal';
+import { MenuComponent } from './components/MenuComponent';
 
 import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 import '@/global.css';
@@ -40,7 +40,7 @@ export default function App() {
       <View style={styles.container}>
       
       <View style={styles.topContainer}>
-        
+        <View style={styles.menu}><MenuComponent></MenuComponent></View>
         <View style={styles.chat} > <ChatComponent ></ChatComponent></View>
       
      
@@ -63,15 +63,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  circle: {
-    width: 100,
-    height: 100,
-    borderRadius: 100 / 2,},
   chat:{
       flex:1,
       alignSelf:"flex-end",
       justifyContent: "flex-end",
       alignItems: "center",
+  },
+  menu:{
+    flex:1,
+    alignSelf:"flex-end",
+    alignItems:"center"
   },
   topContainer: {
     height: "70%",

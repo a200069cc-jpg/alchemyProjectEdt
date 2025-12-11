@@ -14,7 +14,7 @@ export function ChatComponent (){
       <View>
       <Portal isOpen={visible} >
         <HStack className="border-2 w-1/3 py-10 gap-4 rounded-lg flex-row justify-center items-center bg-background-0">
-          <Text className="text-typography-950">Portal Content</Text>
+          <Text className="text-typography-950">Chat Content</Text>
           <Button
             size="xs"
             className="h-6 px-1 absolute top-2 right-2"
