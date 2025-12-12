@@ -28,7 +28,7 @@ export function FilterComponent (){
     return(
       <VStack space='4xl'>
        <Button variant="solid" size="lg" action="primary">
-       <List.Icon color={MD3Colors.tertiary70} icon="folder"/>
+       <ButtonText>Filter 1</ButtonText>
       </Button>
 
       <Button variant="solid" size="lg" action="primary">
