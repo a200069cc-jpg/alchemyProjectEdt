@@ -42,9 +42,6 @@ export default function App() {
       <View style={styles.topContainer}>
         <View style={styles.menu}><MenuComponent></MenuComponent></View>
         <View style={styles.chat} > <ChatComponent ></ChatComponent></View>
-      
-     
-   
  
       </View>
        
