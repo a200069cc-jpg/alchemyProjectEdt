@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const elementRoutes = require('./routes/elementRoutes');
+const userRoutes = require('./routes/userRoutes')
 
 const app = express();
 app.use(express.json());
@@ -23,6 +24,7 @@ mongoose.connect(MONGO_URL, {
 
 //routes
 app.use('/api/elements', elementRoutes);
+app.use('/api/users', userRoutes);
 
 
 app.get('/', (req, res) => {
