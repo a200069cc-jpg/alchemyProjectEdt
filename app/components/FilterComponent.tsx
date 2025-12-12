@@ -1,8 +1,11 @@
-import { View, StyleSheet,Text,FlatList } from 'react-native';
+import { View, StyleSheet,Text,Pressable } from 'react-native';
+import { VStack } from '@/components/ui/vstack';
+import { Button, ButtonText } from './ui/button';
+import { List, MD3Colors } from 'react-native-paper';
 
   
 export function FilterComponent (){
-   const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
     filterButton: {
       width: "100%",
       height: "30%",
@@ -10,18 +13,31 @@ export function FilterComponent (){
       backgroundColor: "#f2f2f2",
       justifyContent: "center",
       alignItems: "center",
-      textAlign:"center",
       borderWidth: 1,
       borderColor: "#ccc",
+      marginVertical: 6,
     },
-  
-  })
+    filterText: {
+      fontSize: 16,
+      color: "#333",
+      textAlign: "center",
+      fontWeight: "500",
+    },
+  });
 
     return(
-        <View>
-          <Text style={styles.filterButton}>Filter 1</Text>
-          <Text style={styles.filterButton}>Filter 2</Text>
-          <Text style={styles.filterButton}>Filter 3</Text>
-        </View>
+      <VStack space='4xl'>
+       <Button variant="solid" size="lg" action="primary">
+       <List.Icon color={MD3Colors.tertiary70} icon="folder"/>
+      </Button>
+
+      <Button variant="solid" size="lg" action="primary">
+        <ButtonText>Filter 2</ButtonText>
+      </Button>
+
+      <Button variant="solid" size="lg" action="primary">
+        <ButtonText>Filter 3</ButtonText>
+      </Button>
+    </VStack>
     )
 }
