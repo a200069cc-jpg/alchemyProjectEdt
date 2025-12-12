@@ -1,12 +1,12 @@
-const mongoose  = require('mongoose')
+const mongoose = require('mongoose');
 
-const elementScheme = new mongoose.Scheme({
+const elementSchema = new mongoose.Schema({
     atomicNumber: Number,
     symbol: String,
     name: String,
     state: String,
     description: String,
     discovered: Boolean
-})
+});
 
-module.exports = mongoose.model('Element', elementScheme);
+module.exports = mongoose.model('Element', elementSchema);
