@@ -4,4 +4,14 @@
     "jsx": "react-jsx"
   },
   "extends": "expo/tsconfig.base"
+    "strict": true,
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "tailwind.config": [
+        "./tailwind.config.js"
+      ]
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import { View, StyleSheet,Text,FlatList } from 'react-native';
+import { View, StyleSheet,Text,FlatList, Pressable } from 'react-native';
 
 type FlatListItem = {
     id: string;
@@ -14,22 +14,25 @@ export function ListComponent ({data}:Props){
    const styles = StyleSheet.create({
     gridContainer: {
       flex: 1,
-      flexDirection: "row",
-      flexWrap: "wrap",
       paddingHorizontal: 10,
-    
     },
-  
+
     gridItem: {
-      width: "15%",
+      flex: 1,
+      margin: 6,
       height: 50,
-      backgroundColor: "#fafafa",
-      borderRadius: 12,
-      borderWidth: 1,
-      borderColor: "#ddd",
+      backgroundColor: "#e0e0e0",
+      borderRadius: 10,
+      justifyContent: "center",
+      alignItems: "center",
     },
-  
-  })
+
+    itemText: {
+      fontSize: 16,
+      color: "#333",
+      fontWeight: "500",
+    },
+  });
     return(
         <View style={styles.gridContainer}>
                 <FlatList
@@ -37,7 +40,10 @@ export function ListComponent ({data}:Props){
         keyExtractor={(item) => item.id}
         numColumns={6} //FlatList does NOT respect flex layout for its items.
         renderItem={({ item }) => (
-          <Text style={styles.gridItem}>{item.title}</Text>
+
+          <Pressable style={styles.gridItem}>
+          <Text style={styles.itemText}>{item.title}</Text>
+        </Pressable>
         )}
       />
         </View>

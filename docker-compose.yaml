@@ -7,4 +7,24 @@ services:
       - ./app:/app
     ports:
       - '8081:8081'
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
 
+  mongodb:
+    image: mongo:6
+    container_name: mongodbalc
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+  
+volumes:
+  mongodb_data:
