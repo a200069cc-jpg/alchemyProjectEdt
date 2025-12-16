@@ -37,10 +37,9 @@ export default function App() {
     { id: '24', title: 'Elemento 24' },]
   return (
     <View style={styles.container}>
-    <TableComponent/>
-     
+      <TableComponent/>
     </View>
-    </GluestackUIProvider>
+    
   
   );
 }

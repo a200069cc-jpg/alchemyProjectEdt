@@ -1,10 +1,5 @@
 import {View, Image, StyleSheet, Text } from 'react-native';
 
-
-
-
-
-
 export function TableComponent (){
     const styles = StyleSheet.create({
         container: {
