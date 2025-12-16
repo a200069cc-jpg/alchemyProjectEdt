@@ -14,10 +14,7 @@ export default function App() {
   const PlaceHolderList = [
     { id: '24', title: 'Elemento 24' },]
   return (
-    <View style={styles.container}>
-      
-      <View style={styles.topContainer}>
-    
+    <View style={styles.container}>    
       <ListComponent data={PlaceHolderList} />
       </View>
       <View style={styles.bottomContainer}>
