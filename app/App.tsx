@@ -1,9 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-<<<<<<< HEAD
-=======
 import {ListComponent} from './components/ListComponent'
->>>>>>> 5f76233 (finish)
 import { ListComponent } from './components/ListComponent'
 import { FilterComponent } from './components/FilterComponent';
 import { TableComponent } from './components/TableComponent';
