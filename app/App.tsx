@@ -44,6 +44,21 @@ export default function App() {
     null,
   ]);
 
+  const [activeElementId, setActiveElementId] = useState<string | null>(null);
+  const [AreaLayout, setAreaLayout] = useState([]);
+  const handleAreaLayout = (index, layout) => {
+    setAreaLayout(prev => {
+      const next = [...prev];
+      next[index] = layout;
+      return next;
+    });
+};
+
+  const handleDragStart = (elementId: string) => {
+    setActiveElementId(elementId);
+  };
+
+
   const handleDrop = (slotIndex: number, elementId: string) => {
     setSlots(prev => {
       const next = [...prev];
@@ -51,13 +66,35 @@ export default function App() {
       return next;
     });
   };
+  const handleDropRelease = (elementId, point) => {
+  const slotIndex = AreaLayout.findIndex(layout =>
+    layout && isInside(point, layout)
+  );
+
+  if (slotIndex === -1) return;
+
+  setSlots(prev => {
+    const next = [...prev];
+    next[slotIndex] = elementId;
+    return next;
+  });
+};
+
+  const isInside = (point, rect) => {
+  return (
+    point.x >= rect.x &&
+    point.x <= rect.x + rect.width &&
+    point.y >= rect.y &&
+    point.y <= rect.y + rect.height
+  );
+};
   return (
     
     <GluestackUIProvider mode="dark">
       <View style={styles.container}>
       
       <View style={styles.topContainer}>
-        <TableComponent slots={slots} onDrop={handleDrop} />
+        <TableComponent slots={slots} onDrop={handleDrop} activeElementId={activeElementId} onAreaLayout={handleAreaLayout} />
         <View style={styles.menu}><MenuComponent></MenuComponent></View>
         <View style={styles.chat} > <ChatComponent ></ChatComponent></View>
  
@@ -65,7 +102,7 @@ export default function App() {
        
       <View style={styles.bottomContainer}>
       <FilterComponent></FilterComponent>
-      <ListComponent data={PlaceHolderList} />
+      <ListComponent data={PlaceHolderList}   onDragStart={handleDragStart}  onDragEnd={handleDropRelease} />
       </View>
      
     </View>
@@ -77,7 +114,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
+    backgroundColor: '#ECECEC'
   },
   chat:{
       flex:1,

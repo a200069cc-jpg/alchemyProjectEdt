@@ -8,15 +8,17 @@ type FlatListItem = {
   }
   type Props = {
    data: FlatListItem[];
+    onDragStart: String;
+    onDragEnd: String;
   }
   
 
-export function ListComponent ({data}:Props){
+export function ListComponent ({data,onDragStart, onDragEnd}:Props){
  
     return(
         <View style={styles.container}>
         {data.map(item => (
-          <ElementComponent key={item.id} item={item}/>
+          <ElementComponent key={item.id} item={item} onDragStart={onDragStart} onDragEnd={onDragEnd}/>
         ))}
         </View>
     )

@@ -1,16 +1,23 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import { runOnJS } from 'react-native-reanimated';
 
-export function DropAreaComponent({ index, assignedElement }) {
-  const drop = Gesture.Tap().onEnd(() => {});
+export function DropAreaComponent({ index, assignedElement, activeElementId, onDrop,onLayout }) {
+  const drop = Gesture.Tap().onEnd(() => {
+    if(!activeElementId)
+    runOnJS(onDrop)(index, activeElementId);
+  });
 
   return (
     <GestureDetector gesture={drop}>
-      <View style={styles.slot}>
-        <Text style={styles.text}>
-          {assignedElement ?? `Selected component ${index + 1}`}
-        </Text>
-      </View>
+       <View
+      style={styles.slot}
+      onLayout={e => onLayout(index, e.nativeEvent.layout)}
+    >
+      <Text style={styles.text}>
+        {assignedElement ?? `Selected component ${index + 1}`}
+      </Text>
+    </View>
     </GestureDetector>
   );
 }

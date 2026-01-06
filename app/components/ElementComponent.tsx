@@ -2,19 +2,27 @@ import { Text, StyleSheet } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
+  runOnJS,
 } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 
-export function ElementComponent({ item }) {
+export function ElementComponent({ item,  onDragStart, onDragEnd}) {
   const x = useSharedValue(0);
   const y = useSharedValue(0);
 
   const pan = Gesture.Pan()
+    .onBegin(() => {
+      runOnJS(onDragStart)(item.id);
+    })
     .onUpdate(e => {
-      x.value = e.translationX;
-      y.value = e.translationY;
+      x.value = e.absoluteX;
+      y.value = e.absoluteY;
     })
     .onEnd(() => {
+      runOnJS(onDragEnd)(item.id, {
+        x: x.value,
+        y: y.value,
+      });
       x.value = 0;
       y.value = 0;
     });

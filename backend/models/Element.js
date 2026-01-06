@@ -5,6 +5,7 @@ const elementSchema = new mongoose.Schema({
     symbol: String,
     name: String,
     state: String,
+    type: String,
     description: String,
     discovered: Boolean
 });

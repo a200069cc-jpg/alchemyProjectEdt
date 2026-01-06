@@ -1,7 +1,7 @@
 import { View, StyleSheet } from 'react-native';
 import { DropAreaComponent } from './DropAreaComponent';
 
-export function TableComponent({ slots, onDrop }) {
+export function TableComponent({ slots, onDrop, activeElementId,onAreaLayout }) {
   return (
     <View style={styles.container}>
       {slots.map((item, index) => (
@@ -10,6 +10,8 @@ export function TableComponent({ slots, onDrop }) {
           index={index}
           assignedElement={item}
           onDrop={onDrop}
+          activeElementId={activeElementId}
+          onLayout={onAreaLayout}
         />
       ))}
     </View>
