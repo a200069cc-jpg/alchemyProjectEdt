@@ -1,30 +1,75 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import {ListComponent} from './components/ListComponent'
 import { ListComponent } from './components/ListComponent'
 import { FilterComponent } from './components/FilterComponent';
 import { ChatComponent } from './components/ChatComponent';
 import { MenuComponent } from './components/MenuComponent';
+import {TableComponent} from './components/TableComponents'
 
 import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 import '@/global.css';
-import { TableComponent } from './components/TableComponent';
+import { useState } from 'react';
 
 export default function App() {
   const PlaceHolderList = [
+    { id: '1', title: 'Elemento 1' },
+    { id: '2', title: 'Elemento 2' },
+    { id: '3', title: 'Elemento 3' },
+    { id: '4', title: 'Elemento 4' },
+    { id: '5', title: 'Elemento 5' },
+    { id: '6', title: 'Elemento 6' },
+    { id: '7', title: 'Elemento 7' },
+    { id: '8', title: 'Elemento 8' },
+    { id: '9', title: 'Elemento 9' },
+    { id: '10', title: 'Elemento 10' },
+    { id: '11', title: 'Elemento 11' },
+    { id: '12', title: 'Elemento 12' },
+    { id: '13', title: 'Elemento 13' },
+    { id: '14', title: 'Elemento 14' },
+    { id: '15', title: 'Elemento 15' },
+    { id: '16', title: 'Elemento 16' },
+    { id: '17', title: 'Elemento 17' },
+    { id: '18', title: 'Elemento 18' },
+    { id: '19', title: 'Elemento 19' },
+    { id: '20', title: 'Elemento 20' },
+    { id: '21', title: 'Elemento 21' },
+    { id: '22', title: 'Elemento 22' },
+    { id: '23', title: 'Elemento 23' },
     { id: '24', title: 'Elemento 24' },]
+
+  
+  const [slots, setSlots] = useState<(string | null)[]>([
+    null,
+    null,
+    null,
+  ]);
+
+  const handleDrop = (slotIndex: number, elementId: string) => {
+    setSlots(prev => {
+      const next = [...prev];
+      next[slotIndex] = elementId;
+      return next;
+    });
+  };
   return (
-    <View style={styles.container}>    
-      <ListComponent data={PlaceHolderList} />
+    
+    <GluestackUIProvider mode="dark">
+      <View style={styles.container}>
+      
+      <View style={styles.topContainer}>
+        <TableComponent slots={slots} onDrop={handleDrop} />
+        <View style={styles.menu}><MenuComponent></MenuComponent></View>
+        <View style={styles.chat} > <ChatComponent ></ChatComponent></View>
+ 
       </View>
+       
       <View style={styles.bottomContainer}>
       <FilterComponent></FilterComponent>
       <ListComponent data={PlaceHolderList} />
       </View>
-    <TableComponent/>
      
     </View>
-    
+    </GluestackUIProvider>
   
   );
 }
@@ -32,6 +77,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    
   },
   chat:{
       flex:1,
