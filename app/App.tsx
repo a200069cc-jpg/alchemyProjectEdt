@@ -4,7 +4,8 @@ import { ListComponent } from './components/ListComponent'
 import { FilterComponent } from './components/FilterComponent';
 import { ChatComponent } from './components/ChatComponent';
 import { MenuComponent } from './components/MenuComponent';
-import {TableComponent} from './components/TableComponents'
+import {TableComponent} from './components/TableComponents';
+import { ImageBackground } from 'react-native';
 
 import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 import '@/global.css';
@@ -90,7 +91,12 @@ export default function App() {
 };
   return (
     
-    <GluestackUIProvider mode="dark">
+      <GluestackUIProvider>
+      <ImageBackground
+        source={require('./assets/back.png')}
+        style={styles.background}
+        resizeMode="stretch"
+      >
       <View style={styles.container}>
       
       <View style={styles.topContainer}>
@@ -106,15 +112,21 @@ export default function App() {
       </View>
      
     </View>
-    </GluestackUIProvider>
+    </ImageBackground>
+   </GluestackUIProvider>
   
   );
 }
 
 const styles = StyleSheet.create({
+  background: {
+  flex: 1,
+  width:'100%',
+   backgroundColor: 'transparent',
+},
   container: {
     flex: 1,
-    backgroundColor: '#ECECEC'
+    backgroundColor: 'transparent',
   },
   chat:{
       flex:1,
@@ -127,21 +139,17 @@ const styles = StyleSheet.create({
     alignSelf:"flex-end",
     alignItems:"center"
   },
-  topContainer: {
-    height: "70%",
-    width: "100%",
-    borderTopWidth: 1,
-    borderColor: "#ccc",
-    paddingVertical: 10,
-    backgroundColor: "#fff",
-  },
-  bottomContainer: {
-    flexDirection: "row",
-    width: "100%",
-    borderTopWidth: 1,
-    borderColor: "#ccc",
-    paddingVertical: 10,
-    backgroundColor: "#fff",
-  },
+ topContainer: {
+  height: '70%',
+  width: '100%',
+  paddingVertical: 10,
+  backgroundColor: 'transparent',
+},
+bottomContainer: {
+  flexDirection: 'row',
+  width: '100%',
+  paddingVertical: 10,
+  backgroundColor: 'transparent',
+},
 
 });
