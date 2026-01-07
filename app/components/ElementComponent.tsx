@@ -15,16 +15,17 @@ export function ElementComponent({ item,  onDragStart, onDragEnd}) {
       runOnJS(onDragStart)(item.id);
     })
     .onUpdate(e => {
-      x.value = e.absoluteX;
-      y.value = e.absoluteY;
+      x.value = e.translationX;
+      y.value = e.translationY;
     })
-    .onEnd(() => {
-      runOnJS(onDragEnd)(item.id, {
-        x: x.value,
-        y: y.value,
-      });
-      x.value = 0;
-      y.value = 0;
+    .onEnd(e => {
+    runOnJS(onDragEnd)(item.id, {
+      x: e.absoluteX,
+      y: e.absoluteY,
+    });
+
+    x.value = 0;
+    y.value = 0;
     });
 
   const style = useAnimatedStyle(() => ({

@@ -9,7 +9,7 @@ export function DropAreaComponent({ index, assignedElement, activeElementId, onD
   });
 
   return (
-    <GestureDetector gesture={drop}>
+    
        <View
       style={styles.slot}
       onLayout={e => onLayout(index, e.nativeEvent.layout)}
@@ -18,7 +18,7 @@ export function DropAreaComponent({ index, assignedElement, activeElementId, onD
         {assignedElement ?? `Selected component ${index + 1}`}
       </Text>
     </View>
-    </GestureDetector>
+
   );
 }
 
