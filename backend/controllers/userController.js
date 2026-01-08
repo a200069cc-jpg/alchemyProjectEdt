@@ -1,59 +1,75 @@
 const User = require('../models/User');
 
-// GET all users
+// Get all users
 exports.getAllUsers = async (req, res) => {
-    try {
-        const users = await User.find();
-        res.json(users);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
-// GET user by ID
+// Get user by ID
 exports.getUserById = async (req, res) => {
-    try {
-        const user = await User.findById(req.params.id);
-        if (!user) return res.status(404).json({ message: 'User not found' });
-        res.json(user);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
-// CREATE new user
+// Create new user
 exports.createUser = async (req, res) => {
-    try {
-        const user = new User(req.body);
-        await user.save();
-        res.status(201).json(user);
-    } catch (err) {
-        // handle duplicate username error
-        if (err.code === 11000) {
-            return res.status(400).json({ message: 'Username already exists' });
-        }
-        res.status(500).json({ error: err.message });
-    }
+  const user = new User({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+    maxLevelUnlocked: req.body.maxLevelUnlocked || 1
+  });
+
+  try {
+    const newUser = await user.save();
+    res.status(201).json(newUser);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 };
 
-// UPDATE user
+// Update user
 exports.updateUser = async (req, res) => {
-    try {
-        const updated = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!updated) return res.status(404).json({ message: 'User not found' });
-        res.json(updated);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
+
+    if (req.body.username) user.username = req.body.username;
+    if (req.body.email) user.email = req.body.email;
+    if (req.body.password) user.password = req.body.password;
+    if (req.body.maxLevelUnlocked !== undefined) user.maxLevelUnlocked = req.body.maxLevelUnlocked;
+
+    const updatedUser = await user.save();
+    res.json(updatedUser);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 };
 
-// DELETE user
+// Delete user
 exports.deleteUser = async (req, res) => {
-    try {
-        const deleted = await User.findByIdAndDelete(req.params.id);
-        if (!deleted) return res.status(404).json({ message: 'User not found' });
-        res.json({ message: 'User deleted' });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
+    await user.deleteOne();
+    res.json({ message: 'User deleted' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
