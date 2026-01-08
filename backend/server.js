@@ -3,14 +3,16 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const elementRoutes = require('./routes/elementRoutes');
-const userRoutes = require('./routes/userRoutes')
+const userRoutes = require('./routes/userRoutes');
+const recipeRoutes = require('./routes/recipeRoutes');
+const levelRoutes = require('./routes/levelRoutes');
+const chatMessageRoutes = require('./routes/chatMessageRoutes');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
-
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://mongodb:27017/alquimistadb';
-
 
 mongoose.connect(MONGO_URL, {
     useNewUrlParser: true,
@@ -22,10 +24,12 @@ mongoose.connect(MONGO_URL, {
     process.exit(1);
 });
 
-//routes
+// Routes
 app.use('/api/elements', elementRoutes);
 app.use('/api/users', userRoutes);
-
+app.use('/api/recipes', recipeRoutes);
+app.use('/api/levels', levelRoutes);
+app.use('/api/chat-messages', chatMessageRoutes);
 
 app.get('/', (req, res) => {
     res.json({ message: 'Backend is running' });

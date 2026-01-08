@@ -1,12 +1,22 @@
 const mongoose = require('mongoose');
 
 const elementSchema = new mongoose.Schema({
-    atomicNumber: Number,
-    symbol: String,
-    name: String,
-    state: String,
-    description: String,
-    discovered: Boolean
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true
+  },
+  state: {
+    type: String,
+    required: true,
+    enum: ['solid', 'liquid', 'gas']
+  },
+  temperature: {
+    type: String,
+    required: true,
+    enum: ['cold', 'neutral', 'warm']
+  }
 });
 
 module.exports = mongoose.model('Element', elementSchema);
